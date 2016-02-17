@@ -1,4 +1,5 @@
 ﻿package  {
+	
 	import flash.display.MovieClip;
 	
 	public class Laser extends MovieClip{
