@@ -2,12 +2,15 @@
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-
+	
 	public class SkippyBall extends MovieClip {
-		var i: int = 1;
-		var jump: int = 5;
-		var up: Boolean = false;
-		var hoogte:Number = 80;
+		private var i: int = 1;
+		private var jump: int = 5;
+		private var up: Boolean = false;
+		private var hoogte:Number = 80;
+		
+		
+		
 		public function SkippyBall() {
 			this.addEventListener(Event.ENTER_FRAME, loop);
 
