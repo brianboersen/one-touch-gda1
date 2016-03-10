@@ -39,7 +39,7 @@
 			text5.defaultTextFormat = format2;
 			text1.text = "press space to start";
 			text2.text = "shoot the skippyballs with space";
-			text3.text = "!!!don't let them trough!!!";
+			text3.text = "!!!don't let them through!!!";
 			text4.text = "you have two shots";
 			text5.text = "you get an extra shot for every pop!";
 			this.addEventListener(Event.ADDED_TO_STAGE, init);
@@ -54,7 +54,7 @@
 			text1.textColor = 0xffff00;
 			text1.x = 290;
 			text1.y = 100;
-			text1.width = 500;
+			text1.width = 600;
 			
 			addChild(text2);
 			text2.textColor = 0x00ff00;

@@ -74,6 +74,7 @@
 			scoretext.defaultTextFormat = format;
 			scoretext.text = "score:";
 			scoretext.x = 450;
+			scoretext.y = 450;
 			scoretext.width = 200;
 			addChild(scoretext);
 			
@@ -145,7 +146,7 @@
 			if (score == 100 || score == 200 || score == 300 || score == 400 || score == 500 || score == 600 || score == 700 || score == 800 || score == 900  ) {
 				if(startsound == true){
 					snelheid += 2;
-					skippytime -= 100;
+					skippytime -= 200;
 					pointsSound.play();
 					soundTimer.start();
 					startsound = false;
@@ -166,6 +167,8 @@
 						if (score > highscore) {
 							highscore = score;
 						}
+					skippytime = 500;
+					snelheid = 10;
 					removeChild(spawnArray[i]);
 					spawnArray.splice(i, 1);
 					cleanupnu();
