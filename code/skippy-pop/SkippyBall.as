@@ -22,7 +22,7 @@
 			// als up = false dan this.y is jump
 			//doe het tegenovergestelde
 			
-			this.x -= 10;
+			this.x -= GameScreen.snelheid;
 			if (this.y <= 270) {
 				hoogte = 50;
 				jump = 2;

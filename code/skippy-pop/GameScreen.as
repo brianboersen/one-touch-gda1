@@ -21,8 +21,17 @@
 		private var popSound:Sound = new Sound(request3);
 		private var request4:URLRequest = new URLRequest("sound/gameover.mp3");
 		private var overSound:Sound = new Sound(request4);
+		private var request5:URLRequest = new URLRequest("sound/trumpets-r.mp3");//point.mp3
+		private var pointsSound:Sound = new Sound(request5)
+		private var request6:URLRequest = new URLRequest("sound/adult-woman.mp3");
+		private var lachSound:Sound = new Sound(request6);
 		
+		
+		private var skippytime:Number = 500;
+		private var startsound:Boolean = true;
 		public static var score:int = 0;
+		public static var highscore:int = 0;
+		public static var snelheid:int = 10;
 		private var format:TextFormat = new TextFormat;
 		private var scoretext:TextField = new TextField;
 		private var shoottext:TextField = new TextField;
@@ -32,7 +41,8 @@
 		private var gameOver:GameOverScreen = new GameOverScreen;
 		private var spawnTimer: Timer = new Timer(Math.random() * 1000 + 500, 1);
 		private var laserTimer: Timer = new Timer(200, 1);
-		private var vuurTimer: Timer = new Timer(200, 1);
+		private var vuurTimer: Timer = new Timer(50, 1);
+		private var soundTimer: Timer = new Timer(5000, 1);
 		private var spawnArray: Array = [];
 		private var klik:Boolean = true;
 		private var shots:int = 2;
@@ -47,6 +57,7 @@
 			spawnTimer.addEventListener(TimerEvent.TIMER_COMPLETE, spawn)
 			laserTimer.addEventListener(TimerEvent.TIMER_COMPLETE, weg)
 			vuurTimer.addEventListener(TimerEvent.TIMER_COMPLETE, vuur)
+			soundTimer.addEventListener(TimerEvent.TIMER_COMPLETE, playsound)
 			spawnTimer.start();
 			addChild(back);
 			
@@ -76,6 +87,10 @@
 			addChild(shoottext);
 			this.removeEventListener(Event.ADDED_TO_STAGE, init);
 		}
+		function playsound(E:TimerEvent) {
+		
+			startsound = true;
+		}
 		function keydown(k: KeyboardEvent): void {
 
 			if (k.keyCode == 32 && klik == true && shots >= 1) {
@@ -97,7 +112,7 @@
 			skippyball.x = 1100;
 			skippyball.y = 270;
 			spawnTimer.reset();
-			spawnTimer.delay = Math.random() * 1000 + 500;
+			spawnTimer.delay = Math.random() * 1000 + skippytime;
 			spawnTimer.start();
 		}
 		function weg(s: TimerEvent) {
@@ -126,32 +141,47 @@
 		}
 		function loop(e: Event): void {
 			scoretext.text = "score: "+ score ;
-			shoottext.text = "shots left "+ shots ;
+			shoottext.text = "shots left " + shots ;
+			if (score == 100 || score == 200 || score == 300 || score == 400 || score == 500 || score == 600 || score == 700 || score == 800 || score == 900  ) {
+				if(startsound == true){
+					snelheid += 2;
+					skippytime -= 100;
+					pointsSound.play();
+					soundTimer.start();
+					startsound = false;
+				}
+			}
 			for (var i: int = 0; i < spawnArray.length; i++) {
 				if (spawnArray[i].y > 460) {
 					jumpSound.play();
 				}
 				
 				if (spawnArray[i].x < 50) {
-					overSound.play();
+					if (score <= 30) {
+							lachSound.play();
+						}
+					else{
+						overSound.play();
+						}
+						if (score > highscore) {
+							highscore = score;
+						}
 					removeChild(spawnArray[i]);
 					spawnArray.splice(i, 1);
-					//cleanup = true;
 					cleanupnu();
 					
 					
 				}
-				if (wolk.x <= 0) {
-					removeChild(gaster);
-					addChild(gaster);
-				}
+				
 				if (this.contains(laser)) {
 					if (spawnArray[i].x >= 280 && spawnArray[i].x <= 330 ) {
+						
 						popSound.play();
 						removeChild(spawnArray[i]);
 						spawnArray.splice(i, 1);
 						shots += 1;
 						score += 5;
+						
 						
 					}
 				}

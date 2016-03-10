@@ -38,7 +38,7 @@
 			text4.defaultTextFormat = format2;
 			text5.defaultTextFormat = format2;
 			text1.text = "press space to start";
-			text2.text = "shoot the skippyballs whit space";
+			text2.text = "shoot the skippyballs with space";
 			text3.text = "!!!don't let them trough!!!";
 			text4.text = "you have two shots";
 			text5.text = "you get an extra shot for every pop!";
