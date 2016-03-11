@@ -15,13 +15,13 @@
 		
 		private var request1:URLRequest = new URLRequest("sound/jump.mp3");//add sound .mp3 alleen
 		private var jumpSound:Sound = new Sound(request1);
-		private var request2:URLRequest = new URLRequest("sound/phasingbeam.mp3");//add sound .mp3 alleen
+		private var request2:URLRequest = new URLRequest("sound/phasingbeam.mp3");
 		private var laserSound:Sound = new Sound(request2);
-		private var request3:URLRequest = new URLRequest("sound/pop-distorted.mp3");//pop2.mp3
+		private var request3:URLRequest = new URLRequest("sound/pop-distorted.mp3");
 		private var popSound:Sound = new Sound(request3);
 		private var request4:URLRequest = new URLRequest("sound/gameover.mp3");
 		private var overSound:Sound = new Sound(request4);
-		private var request5:URLRequest = new URLRequest("sound/trumpets-r.mp3");//point.mp3
+		private var request5:URLRequest = new URLRequest("sound/trumpets-r.mp3");
 		private var pointsSound:Sound = new Sound(request5)
 		private var request6:URLRequest = new URLRequest("sound/adult-woman.mp3");
 		private var lachSound:Sound = new Sound(request6);
@@ -132,12 +132,12 @@
 					removeChild(spawnArray[i]);
 					spawnArray.splice(i, 1);
 				}
-				stage.removeEventListener(KeyboardEvent.KEY_UP, keydown);
+			stage.removeEventListener(KeyboardEvent.KEY_UP, keydown);
 			spawnTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, spawn)
 			laserTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, weg)
 			vuurTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, vuur)
-				this.removeEventListener(Event.ENTER_FRAME, loop);
-				this.dispatchEvent(new Event("gameover"));
+			this.removeEventListener(Event.ENTER_FRAME, loop);
+			this.dispatchEvent(new Event("gameover"));
 				
 		}
 		function loop(e: Event): void {
@@ -146,7 +146,13 @@
 			if (score == 100 || score == 200 || score == 300 || score == 400 || score == 500 || score == 600 || score == 700 || score == 800 || score == 900  ) {
 				if(startsound == true){
 					snelheid += 2;
-					skippytime -= 200;
+					if (skippytime > 100) {
+						skippytime -= 200;
+					}
+					if (skippytime == 100) {
+						skippytime -= 100;
+					}
+					
 					pointsSound.play();
 					soundTimer.start();
 					startsound = false;
