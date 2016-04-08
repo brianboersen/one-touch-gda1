@@ -7,6 +7,8 @@
 		public var gameScreen:GameScreen ;
 		public var gameOver:GameOverScreen;
 		public var startScreen:StartScreen;
+		public static var tutorial:Boolean = true;//true
+		public static var firsttime:Boolean = true;//false
 		 
 		public function Main() {
 			

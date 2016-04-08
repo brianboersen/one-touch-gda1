@@ -5,19 +5,19 @@
 	
 	
 	public class Wolk1 extends MovieClip {
-		private var plaatsy:int = Math.random() * 100 + 20; 
-		private var wind:int = Math.random() * 3 + 4; 
+		 
+		public static var wind:int = 2; 
 		
 		public function Wolk1() {
 			this.x = Math.random() * 1000 +1000;
-			this.y = Math.random() * 100 + 20;
+			this.y =420;
 			this.addEventListener(Event.ENTER_FRAME, loop);
 		}
 		function loop(e:Event) {
 			this.x -= wind;
-			if (this.x <= 0) {
+			if (this.x <= -50) {
 				this.x = Math.random()*300+1300;
-				this.y = plaatsy;
+				this.y =420;
 			}
 		}
 	}

@@ -14,10 +14,13 @@
 		private var text2:TextField = new TextField;
 		private var textscore:TextField = new TextField;
 		private var texthighscore:TextField = new TextField;
+		private var texttimer:TextField = new TextField;
 		private var zwart:Zwart = new Zwart;
-		private var timer:Timer = new Timer(4000, 1);
+		private var timer:Timer = new Timer(1000, 1);
 		private var naarstart:Timer = new Timer(10000, 1);
 		private var spatie:Boolean = false;
+		
+		private var timertime:int = 3;
 		public function GameOverScreen() {
 			this.addEventListener(Event.ADDED_TO_STAGE, init)
 			
@@ -25,6 +28,7 @@
 			
 		}
 		private function init(e:Event) {
+			
 			timer.addEventListener(TimerEvent.TIMER_COMPLETE, klaar);
 			naarstart.addEventListener(TimerEvent.TIMER_COMPLETE, go);
 			stage.addEventListener(KeyboardEvent.KEY_UP, terug);
@@ -32,12 +36,14 @@
 			formatbig.size = 60;
 			text1.defaultTextFormat = formatbig;
 			text2.defaultTextFormat = format;
+			texttimer.defaultTextFormat = format;
 			textscore.defaultTextFormat = format;
 			texthighscore.defaultTextFormat = format;
 			text1.text = "game over";
 			text2.text = "press space to go back to start";
 			textscore.text = "your score is: " + GameScreen.score;
 			texthighscore.text = "your highscore is: " + GameScreen.highscore;
+			texttimer.text = "3";
 			
 			timer.start();
 			addChild(zwart);
@@ -60,16 +66,35 @@
 			texthighscore.width = 500
 			texthighscore.textColor = 0xffffff;
 			
-			addChild(text2);
+			addChild(texttimer);
+			texttimer.x = 500;
+			texttimer.y = 340;
+			texttimer.width = 500
+			texttimer.textColor = 0xff0000;
+			
+			
 			text2.x = 330;
 			text2.y = 440;
 			text2.width = 500
 			text2.textColor = 0xffffff;
+			
+			
 		
 		}
+		
 		private function klaar(e:TimerEvent) {
-			spatie = true;
-			naarstart.start();
+			if (timertime > 0) {
+				timertime -= 1;
+				texttimer.text = "" + timertime;
+				timer.reset();
+				timer.start();
+			}
+			if (timertime == 0) {
+				removeChild(texttimer);
+				addChild(text2);
+				spatie = true;
+				naarstart.start();
+			}
 			
 		}
 		private function go(e:TimerEvent) {
